@@ -1,0 +1,11 @@
+flowchart LR
+    A["Aplicação backend"] --> B["logs/app.log"]
+    B --> C["Logstash — Input file"]
+    C --> D{"Formato do registro"}
+    D -->|JSON| E["Filtro JSON"]
+    D -->|Texto simples| F["Filtro Grok"]
+    E --> G["Filtro Date"]
+    F --> G
+    G --> H["Elasticsearch — índice tarefas-logs"]
+    H --> I["Kibana — Discover"]
+    C --> J["stdout / rubydebug"]
